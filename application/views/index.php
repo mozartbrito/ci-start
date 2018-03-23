@@ -1,7 +1,10 @@
 <!-- header -->
 <?php $this->load->view('template/header'); ?>
 <!-- navbar -->
-<?php $this->load->view('template/navbar'); ?>
+<?php if(isset($menu)): 
+  $this->load->view('template/navbar'); 
+  endif;
+?>
 <!-- container -->
 <div class="container">
 <!-- breadcrumb -->
@@ -17,7 +20,6 @@
   <!-- aqui vai nosso contudo -->
     <?php $this->load->view($conteudo) ?>
   <!-- aqui vai nosso conteudo -->
-<?php print_r($dados); ?>
 </div>
 <!-- container -->
 

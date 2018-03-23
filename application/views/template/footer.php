@@ -4,7 +4,7 @@
     <script src="<?php echo base_url(); ?>public/js/bootstrap.min.js" ></script>
     <script src="<?php echo base_url(); ?>public/js/highcharts.js"></script>
     <script src="<?php echo base_url(); ?>public/js/exporting.js"></script>
-
+    <?php if(isset($dados)): ?>
     <script>
       // Build the chart
 Highcharts.chart('grafico1', {
@@ -44,5 +44,6 @@ Highcharts.chart('grafico1', {
     }]
 });
     </script>
+<?php endif; ?>
   </body>
 </html>

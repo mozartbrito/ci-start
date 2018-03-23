@@ -13,8 +13,9 @@ class Principal extends CI_Controller {
 			'Edge' => 2,
 			'Safari' => 15
 		);
+		$this->data['menu'] = true;
 		$this->data['titulo'] = 'Conteúdo do Controller Principal';
-		$this->data['conteudo'] = 'conteudo';
+		$this->data['conteudo'] = 'principal/index';
 		$this->data['dados'] = $dados;
 		$this->load->view('index', $this->data);
 	}
