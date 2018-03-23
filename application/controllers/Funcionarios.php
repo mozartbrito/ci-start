@@ -7,9 +7,22 @@ class Funcionarios extends CI_Controller {
 
 	public function index()
 	{
-		$this->data['teste'] = '';
+		$this->load->model('funcionarios_model', 'fm');
+
+		$this->data['funcionarios'] = $this->fm->get_funcionarios()->result();
+
 		$this->data['titulo'] = 'Lista de funcionários';
 		$this->data['conteudo'] = 'funcionarios/index';
+		$this->load->view('index', $this->data);
+	}
+	public function mostrar()
+	{
+		$this->data['nome'] = 'João Ferreira';
+		$this->data['sexo'] = 'Masculino';
+		$this->data['dt_nascimento'] = '10/10/1988';
+
+		$this->data['titulo'] = 'Dados de fulano';
+		$this->data['conteudo'] = 'funcionarios/mostrar';
 		$this->load->view('index', $this->data);
 	}
 

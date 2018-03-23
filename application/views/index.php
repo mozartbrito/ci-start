@@ -1,10 +1,7 @@
 <!-- header -->
 <?php $this->load->view('template/header'); ?>
 <!-- navbar -->
-<?php if(isset($menu)): 
-  $this->load->view('template/navbar'); 
-  endif;
-?>
+<?php  $this->load->view('template/navbar'); ?>
 <!-- container -->
 <div class="container">
 <!-- breadcrumb -->
@@ -14,6 +11,12 @@
     <li class="breadcrumb-item"><a href="#">Library</a></li>
     <li class="breadcrumb-item active" aria-current="page">Data</li>
   </ol>
+  <div class="text-right">
+    <a href="javascript:history.back(-1)" class="btn btn-warning">
+      <i class="fas fa-arrow-left"></i>
+      Voltar
+    </a>
+  </div>
 </nav>
   <!-- breadcrumb -->
 	<h1><?php echo $titulo; ?></h1>

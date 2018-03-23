@@ -7,7 +7,8 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="<?php echo base_url('public/css/bootstrap.min.css'); ?>">
     <link rel="stylesheet" href="<?php echo base_url(); ?>public/css/reset.css">
-
+	<!-- CSS Fontawsome -->
+	<link rel="stylesheet" href="<?php echo base_url(); ?>public/css/font/fontawesome-all.css" >
     <title>Aula 2</title>
   </head>
   <body>
