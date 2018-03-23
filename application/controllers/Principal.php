@@ -8,7 +8,7 @@ class Principal extends CI_Controller {
 	public function index()
 	{
 		$dados = array(
-			'Google Chrom' => 78,
+			'Google Chrome' => 78,
 			'Firefox' => 30,
 			'Edge' => 2,
 			'Safari' => 15
