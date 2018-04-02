@@ -13,9 +13,7 @@
               icon: "warning",
               buttons: true,
               dangerMode: true,
-              confirmButtonColor: '#3085d6',
-              cancelButtonColor: '#d33',
-              confirmButtonText: 'Sim, continuar!'
+              buttons: ["Cancelar", "Sim, excluir."],
             })
             .then((willDelete) => {
               if (willDelete) {
