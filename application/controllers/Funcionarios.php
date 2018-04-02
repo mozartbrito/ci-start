@@ -26,7 +26,7 @@ class Funcionarios extends CI_Controller {
 
 		$this->data['funcionario'] = $this->fm->get_funcionario($id_funcionario)->row();	
 
-		$this->data['titulo'] = 'Dados de fulano';
+		$this->data['titulo'] = 'Dados de '.$this->data['funcionario']->nome;
 		$this->data['conteudo'] = 'funcionarios/mostrar';
 		$this->load->view('index', $this->data);
 	}
@@ -36,6 +36,23 @@ class Funcionarios extends CI_Controller {
 			redirect('funcionarios/index', 'refresh');
 		}
 		$this->fm->deletar($id_funcionario);
+		redirect('funcionarios','refresh');
+	}
+	public function novo()
+	{
+		$this->data['titulo'] = 'Novo funcionário';
+		$this->data['conteudo'] = 'funcionarios/novo';
+		$this->load->view('index', $this->data);
+	}
+	public function cadastrar()
+	{
+		$this->load->helper('funcoes');
+		$dados['nome'] = $this->input->post('nome');
+		$dados['sexo'] = $this->input->post('sexo');
+		$dados['dt_nascimento'] = $this->input->post('dt_nascimento');
+
+		echo gravaDateDB($dados['dt_nascimento']); exit;
+		$this->fm->salvar($dados);
 		redirect('funcionarios','refresh');
 	}
 
