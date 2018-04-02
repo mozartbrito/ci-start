@@ -20,25 +20,11 @@
             .then((willDelete) => {
               if (willDelete) {
                 window.location.href = url;
-               /* swal("Poof! Your imaginary file has been deleted!", {
-                  icon: "success",
-                });*/
               } else {
                 swal("Cancelado com sucesso!");
               }
             });
-                /*swal({
-                      title: 'Tem certeza que deseja excluir?',
-                      text: "Não poderá ser desfeito!",
-                      type: 'warning',
-                      showCancelButton: true,
-                      confirmButtonColor: '#3085d6',
-                      cancelButtonColor: '#d33',
-                      confirmButtonText: 'Sim, continuar!'
-                    }).then(function () {
-                      window.location.href = url;
-                    })*/
-            }
+        }
     </script>
     <?php if(isset($dados)): ?>
     <script>

@@ -27,7 +27,7 @@
 						 <i class="fas fa-edit"></i>
 					</a>
 					&nbsp;
-					<a href="#" title="Deletar" onclick="return excluir()">
+					<a href="#" title="Deletar" onclick="return excluir('<?php echo site_url('funcionarios/deletar/').$funcionario->id; ?>')">
 						 <i class="far fa-trash-alt"></i>
 					</a>
 				</td>
