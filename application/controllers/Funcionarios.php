@@ -5,25 +5,38 @@ class Funcionarios extends CI_Controller {
 
 	private $data;
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('funcionarios_model', 'fm');
+	}
 	public function index()
 	{
-		$this->load->model('funcionarios_model', 'fm');
-
 		$this->data['funcionarios'] = $this->fm->get_funcionarios()->result();
 
 		$this->data['titulo'] = 'Lista de funcionários';
 		$this->data['conteudo'] = 'funcionarios/index';
 		$this->load->view('index', $this->data);
 	}
-	public function mostrar()
+	public function mostrar($id_funcionario = '')
 	{
-		$this->data['nome'] = 'João Ferreira';
-		$this->data['sexo'] = 'Masculino';
-		$this->data['dt_nascimento'] = '10/10/1988';
+		if($id_funcionario == '') {
+			redirect('funcionarios/index', 'refresh');
+		}
+
+		$this->data['funcionario'] = $this->fm->get_funcionario($id_funcionario)->row();	
 
 		$this->data['titulo'] = 'Dados de fulano';
 		$this->data['conteudo'] = 'funcionarios/mostrar';
 		$this->load->view('index', $this->data);
+	}
+	public function deletar($id_funcionario = '')
+	{
+		if($id_funcionario == '') {
+			redirect('funcionarios/index', 'refresh');
+		}
+		$this->fm->deletar($id_funcionario);
+		redirect('funcionarios','refresh');
 	}
 
 }
