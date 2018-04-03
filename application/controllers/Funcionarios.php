@@ -12,7 +12,7 @@ class Funcionarios extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->data['funcionarios'] = $this->fm->get_funcionarios()->result();
+		$this->data['funcionarios'] = $this->fm->get_all()->result();
 
 		$this->data['titulo'] = 'Lista de funcionários';
 		$this->data['conteudo'] = 'funcionarios/index';
@@ -24,7 +24,7 @@ class Funcionarios extends CI_Controller {
 			redirect('funcionarios/index', 'refresh');
 		}
 
-		$this->data['funcionario'] = $this->fm->get_funcionario($id_funcionario)->row();	
+		$this->data['funcionario'] = $this->fm->get_one($id_funcionario)->row();	
 
 		$this->data['titulo'] = 'Dados de '.$this->data['funcionario']->nome;
 		$this->data['conteudo'] = 'funcionarios/mostrar';
@@ -32,10 +32,13 @@ class Funcionarios extends CI_Controller {
 	}
 	public function deletar($id_funcionario = '')
 	{
+		//danger, success, info, warning, default
 		if($id_funcionario == '') {
+			$this->session->set_flashdata(array('tipo' => 'danger', 'mensagem' => 'O ID é obrigatório para esta função!'));
 			redirect('funcionarios/index', 'refresh');
 		}
 		$this->fm->deletar($id_funcionario);
+		$this->session->set_flashdata(array('tipo' => 'success', 'mensagem' => 'Excluído com sucesso!'));
 		redirect('funcionarios','refresh');
 	}
 	public function salvar()
@@ -49,8 +52,10 @@ class Funcionarios extends CI_Controller {
 
 		if($id_funcionario == '') {
 			$this->fm->salvar($dados);
+			$this->session->set_flashdata(array('tipo' => 'success', 'mensagem' => $dados['nome'].' inserido com sucesso!'));
 		} else {
 			$this->fm->alterar($id_funcionario, $dados);
+			$this->session->set_flashdata(array('tipo' => 'success', 'mensagem' => $dados['nome'].' alterado com sucesso!'));
 		}
 		redirect('funcionarios','refresh');
 	}
@@ -60,7 +65,7 @@ class Funcionarios extends CI_Controller {
 
 		if($id_funcionario != '') {
 			$this->data['titulo'] = 'Editar funcionário';
-			$this->data['funcionario'] = $this->fm->get_funcionario($id_funcionario)->row();
+			$this->data['funcionario'] = $this->fm->get_one($id_funcionario)->row();
 
 			if(!isset($this->data['funcionario']->nome)) {
 				redirect('funcionarios','refresh');

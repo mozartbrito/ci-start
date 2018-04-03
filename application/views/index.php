@@ -4,6 +4,13 @@
 <?php  $this->load->view('template/navbar'); ?>
 <!-- container -->
 <div class="container">
+<!-- section -->
+<?php if($this->session->flashdata('tipo') != '') { ?>
+<div class="alert alert-<?php echo $this->session->flashdata('tipo'); ?> text-center">
+  <?php echo $this->session->flashdata('mensagem'); ?>
+</div>
+<?php } ?>
+<!-- section -->
 <!-- breadcrumb -->
 <nav aria-label="breadcrumb">
   <ol class="breadcrumb">
