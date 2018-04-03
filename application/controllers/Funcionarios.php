@@ -38,22 +38,37 @@ class Funcionarios extends CI_Controller {
 		$this->fm->deletar($id_funcionario);
 		redirect('funcionarios','refresh');
 	}
-	public function novo()
-	{
-		$this->data['titulo'] = 'Novo funcionário';
-		$this->data['conteudo'] = 'funcionarios/novo';
-		$this->load->view('index', $this->data);
-	}
-	public function cadastrar()
+	public function salvar()
 	{
 		$this->load->helper('funcoes');
+		$id_funcionario = $this->input->post('id');
 		$dados['nome'] = $this->input->post('nome');
 		$dados['sexo'] = $this->input->post('sexo');
 		$dados['dt_nascimento'] = $this->input->post('dt_nascimento');
+		$dados['dt_nascimento'] = gravaDateDB($dados['dt_nascimento']);
 
-		echo gravaDateDB($dados['dt_nascimento']); exit;
-		$this->fm->salvar($dados);
+		if($id_funcionario == '') {
+			$this->fm->salvar($dados);
+		} else {
+			$this->fm->alterar($id_funcionario, $dados);
+		}
 		redirect('funcionarios','refresh');
+	}
+	public function cadastrar($id_funcionario = '')
+	{
+		$this->data['titulo'] = 'Novo funcionário';
+
+		if($id_funcionario != '') {
+			$this->data['titulo'] = 'Editar funcionário';
+			$this->data['funcionario'] = $this->fm->get_funcionario($id_funcionario)->row();
+
+			if(!isset($this->data['funcionario']->nome)) {
+				redirect('funcionarios','refresh');
+			}
+		}
+
+		$this->data['conteudo'] = 'funcionarios/novo';
+		$this->load->view('index', $this->data);
 	}
 
 }

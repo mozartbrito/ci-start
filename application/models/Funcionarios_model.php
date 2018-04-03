@@ -21,6 +21,11 @@ class Funcionarios_model extends CI_Model {
 		//ci-start.funcionario = AULA.FUNCIONARIO
 		$this->db->insert('ci-start.funcionario', $dados);
 	}
+	public function alterar($id_funcionario, $dados)
+	{
+		$this->db->where('id', $id_funcionario);
+		$this->db->update('ci-start.funcionario', $dados);
+	}
 }
 
 /* End of file Funcionarios_model.php */
