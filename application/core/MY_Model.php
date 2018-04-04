@@ -26,11 +26,27 @@ class MY_Model extends CI_Model {
 	public function salvar($dados)
 	{
 		$this->db->insert($this->table, $dados);
+		return $this->db->insert_id();
 	}
 	public function alterar($primary_key, $dados)
 	{
 		$this->db->where($this->primary_key, $primary_key);
 		$this->db->update($this->table, $dados);
+	}
+	/**
+	 * [getLastId description]
+	 * Função baseada em uma publicação no Stackoverflow, para selecionar
+	 * a SEQUENCE do Oracle. Na versão original, acessa o próximo SEQUENCE,
+	 * neste, acessamos o atual com o CURRVAL
+	 * @return [type] [description]
+	 */
+	public function getLastId() 
+	{
+		$row = $this->db->select($this->table."_ID_SEQ.CURRVAL AS LASTID", FALSE)
+				->from($this->table);
+				->get()
+				->row();
+		return $row->LASTID;
 	}
 }
 

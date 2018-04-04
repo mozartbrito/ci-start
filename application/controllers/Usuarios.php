@@ -41,6 +41,43 @@ class Usuarios extends CI_Controller {
 		$this->data['conteudo'] = 'usuarios/mostrar';
 		$this->load->view('index', $this->data);
 	}
+	public function cadastrar($id = '')
+	{
+		$this->data['titulo'] = 'Novo usuário';
+
+		if($id != '') {
+
+			$this->data['titulo'] = 'Editar usuário';
+			$this->data['usuario'] = $this->um->get_one($id)->row();
+
+			if(!isset($this->data['usuario']->nome)) {
+				$this->session->set_flashdata(array('tipo' => 'danger', 'mensagem' => 'Usuário não encontrado.'));
+				redirect('usuarios','refresh');
+			}
+		}
+
+		$this->data['conteudo'] = 'usuarios/novo';
+		$this->load->view('index', $this->data);		
+	}
+	public function salvar()
+	{
+		$id = $this->input->post('id');
+		$dados['nome'] = $this->input->post('nome');
+		$dados['email'] = $this->input->post('email');
+
+		if($this->input->post('senha') != '') {
+			$dados['senha'] = md5($this->input->post('senha'));
+		}
+
+		if($id != '') {
+			$this->um->alterar($id, $dados);
+		} else {
+			$id = $this->um->salvar($dados); //version MySQL
+			//$id = $this->um->getLastId(); //version Oracle
+		}
+		$this->session->set_flashdata(array('tipo'=>'success', 'mensagem' => 'Dados salvos com sucesso!'));
+		redirect('usuarios/cadastrar/'.$id,'refresh');
+	}
 
 }
 
