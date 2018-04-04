@@ -35,7 +35,7 @@ class MY_Model extends CI_Model {
 	}
 	/**
 	 * [getLastId description]
-	 * Função baseada em uma publicação no Stackoverflow, para selecionar
+	 * Função baseada em uma publicação no Stackoverflow (questions/16790026/codeigniter-oracle-get-insert-id **** Nirjhor Anjum ), para selecionar
 	 * a SEQUENCE do Oracle. Na versão original, acessa o próximo SEQUENCE,
 	 * neste, acessamos o atual com o CURRVAL
 	 * @return [type] [description]
@@ -43,7 +43,7 @@ class MY_Model extends CI_Model {
 	public function getLastId() 
 	{
 		$row = $this->db->select($this->table."_ID_SEQ.CURRVAL AS LASTID", FALSE)
-				->from($this->table);
+				->from($this->table)
 				->get()
 				->row();
 		return $row->LASTID;
