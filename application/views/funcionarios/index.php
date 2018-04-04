@@ -20,11 +20,11 @@
 				<td><?php echo $funcionario->sexo; ?></td>
 				<td width="10%">
 					<a href="<?php echo site_url('funcionarios/mostrar/').$funcionario->id; ?>" title="Visualizar dados">
-						 <i class="fas fa-user"></i>
+						 <i class="far fa-user"></i>
 					</a>
 					&nbsp;
 					<a href="<?php echo site_url('funcionarios/cadastrar/').$funcionario->id; ?>" title="Editar dados">
-						 <i class="fas fa-edit"></i>
+						 <i class="far fa-edit"></i>
 					</a>
 					&nbsp;
 					<a href="#" title="Deletar" onclick="return excluir('<?php echo site_url('funcionarios/deletar/').$funcionario->id; ?>')">
