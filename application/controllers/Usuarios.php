@@ -72,8 +72,7 @@ class Usuarios extends CI_Controller {
 		if($id != '') {
 			$this->um->alterar($id, $dados);
 		} else {
-			$id = $this->um->salvar($dados); //version MySQL
-			//$id = $this->um->getLastId(); //version Oracle
+			$id = $this->um->salvar($dados);
 		}
 		$this->session->set_flashdata(array('tipo'=>'success', 'mensagem' => 'Dados salvos com sucesso!'));
 		redirect('usuarios/cadastrar/'.$id,'refresh');

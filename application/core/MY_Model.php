@@ -27,6 +27,13 @@ class MY_Model extends CI_Model {
 	{
 		$this->db->insert($this->table, $dados);
 		return $this->db->insert_id();
+		/*
+		if($this->db->insert($this->table, $dados)) {
+			return $this->getLastId();
+		} else {
+			return '';
+		} //ORACLE
+		 */
 	}
 	public function alterar($primary_key, $dados)
 	{
