@@ -12,8 +12,9 @@ class Usuarios extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->data['usuarios'] = $this->um->get_all()->result();
-
+		$busca = $this->input->post('busca');
+		$this->data['usuarios'] = $this->um->get_all($busca)->result();
+		
 		$this->data['titulo']  = "Lista usuários";
 		$this->data['conteudo'] = "usuarios/index";
 		$this->load->view('index', $this->data);

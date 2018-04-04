@@ -10,7 +10,24 @@ function gravaDateDB($data) {
 function viewDate($data) {
 	return date('d/m/Y', strtotime($data)); 
 }
-
+/**
+ * [marcarBusca description]
+ * Função criada para marcar os campos pesquisados em uma listagem
+ * @param  [type] $var   [description] -> qual valor procurar
+ * @param  [type] $campo [description] -> em qual variável procurar
+ * @return [type]        [description]
+ */
+function marcarBusca($var, $campo) {
+	if($var != '')
+	{
+		return str_replace($var, '<strong style="background-color: yellow;">'.$var.'</strong>', $campo);
+	}
+	else
+	{
+		return $campo;
+	}
+	
+}
 function debugger($var) {
 	echo '<pre>';
 	print_r($var);

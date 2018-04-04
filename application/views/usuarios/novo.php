@@ -1,4 +1,4 @@
-<div class="card col-md-12">
+<div class="card col-md-12" style="padding: 20px;">
 	
 	<form action="<?php echo site_url('usuarios/salvar') ?>" method="post">
 		<div class="form-group">
