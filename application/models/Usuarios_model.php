@@ -22,6 +22,10 @@ class Usuarios_model extends MY_Model {
 		return $this->db->order_by('nome')
 					->get($this->table);
 	}
+	public function verifica_login($email, $senha)
+	{
+		return $this->db->get_where($this->table, array('email' => $email, 'senha' => $senha));
+	}
 }
 
 /* End of file Usuarios_model.php */
