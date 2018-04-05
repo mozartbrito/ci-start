@@ -3,7 +3,8 @@
 		<div class="text-left col-md-8">
 			<form class="form-inline" method="post">
 		      <input class="form-control mr-sm-2" type="search" placeholder="Pesquisar" aria-label="Search" name="busca" autofocus>
-		      <button class="btn btn-outline-success" type="submit">Pesquisar</button>
+		      <button class="btn btn-outline-success mr-sm-2" type="submit">Pesquisar</button>
+		      <a href="<?php echo site_url('usuarios') ?>" class="btn btn-outline-warning">Limpar</a>
 		    </form>
 		</div>
 		<div class="text-right col-md-4">
@@ -31,7 +32,11 @@
 							echo marcarBusca($this->session->flashdata('marcar'), $usuario->nome);
 						?>
 					</td>
-					<td><?php echo marcarBusca($this->session->flashdata('marcar'), $usuario->email) ?></td>
+					<td>
+						<?php 
+							echo marcarBusca($this->session->flashdata('marcar'), $usuario->email);
+						?>
+					</td>
 					<td>
 						<a href="<?php echo site_url('usuarios/mostrar/').$usuario->id; ?>">
 							<i class="far fa-user"></i>
@@ -47,7 +52,12 @@
 
 					</td>
 				</tr>
-			<?php endforeach; //foreach usuarios ?>
+			<?php endforeach; ?>
 		</tbody>
 	</table>
+	<!-- pagination -->
+	<nav aria-label="Page navigation example">
+	<?php if(isset($this->pagination)) { echo $this->pagination->create_links(); } ?>
+	</nav>
+	<!-- pagination -->
 </div>

@@ -10,11 +10,22 @@ class Usuarios extends CI_Controller {
 		parent::__construct();
 		$this->load->model('usuarios_model', 'um');
 	}
-	public function index()
+	public function index($uri = 1)
 	{
+		$limit = 5;
+		$uri = ($uri * $limit) - $limit;
 		$busca = $this->input->post('busca');
-		$this->data['usuarios'] = $this->um->get_all($busca)->result();
+
+		$this->data['usuarios'] = $this->um->get_all($busca, $limit, $uri)->result();
 		
+		$this->load->library('pagination');
+
+		$num_rows = $this->um->get_all($busca)->num_rows();
+		$base_url = site_url('usuarios/index');
+		$config = config_pagination($base_url, $num_rows, $limit, 3);
+
+		$this->pagination->initialize($config);
+
 		$this->data['titulo']  = "Lista usuários";
 		$this->data['conteudo'] = "usuarios/index";
 		$this->load->view('index', $this->data);

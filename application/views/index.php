@@ -5,7 +5,7 @@
 <!-- container -->
 <div class="container">
 <!-- section -->
-<?php if($this->session->flashdata('tipo') != '') { ?>
+<?php if($this->session->flashdata('mensagem') != '') { ?>
 <div class="alert alert-<?php echo $this->session->flashdata('tipo'); ?> text-center">
   <?php echo $this->session->flashdata('mensagem'); ?>
 </div>
