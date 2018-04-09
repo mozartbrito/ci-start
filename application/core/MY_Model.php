@@ -55,6 +55,17 @@ class MY_Model extends CI_Model {
 				->row();
 		return $row->LASTID;
 	}
+	public function verifySession()
+	{
+		if($this->session->userdata('logado') != TRUE) {
+			$this->session->set_flashdata(array(
+				'tipo' => 'danger',
+				'mensagem' => 'Você não possui permissão de acesso, efetue login!'
+			));
+			$this->session->set_userdata('url_access', current_url());
+			redirect('login','refresh');
+		}
+	}
 }
 
 /* End of file MY_Model.php */

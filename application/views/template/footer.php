@@ -26,7 +26,7 @@
     </script>
     <script>
         var base_url = "<?php echo base_url(); ?>";
-        
+
         function efetuaLogin() {
             var email_form = $('#email').val();
             var senha_form = $('#senha').val();
@@ -44,9 +44,10 @@
                     },
                     success: function(result) {
                         if(result == 1) {
+                            var url_access = "<?php echo ($this->session->userdata('url_access') != '' ? $this->session->userdata('url_access') : base_url('principal')); ?>";
                             var mensagem = '<div class="alert alert-success text-center">Login efetuado com sucesso! <br /> Aguarde que será redirecionado.</div>'; 
                             setTimeout(function(){
-                                window.location.href = base_url + "principal";
+                                window.location.href = url_access;
                             }, 2000);
                         } else if(result == 0) {
                             var mensagem = '<div class="alert alert-danger text-center">Usuário não encontrado ou não possui permissão de acesso!</div>';

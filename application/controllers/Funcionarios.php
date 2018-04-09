@@ -9,6 +9,7 @@ class Funcionarios extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('funcionarios_model', 'fm');
+		$this->fm->verifySession();
 	}
 	public function index()
 	{

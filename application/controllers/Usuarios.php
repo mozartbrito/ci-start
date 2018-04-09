@@ -9,6 +9,7 @@ class Usuarios extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('usuarios_model', 'um');
+		$this->um->verifySession();
 	}
 	public function index($uri = 1)
 	{

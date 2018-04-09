@@ -5,6 +5,12 @@ class Principal extends CI_Controller {
 
 	private $data;
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('my_model', 'fm');
+		$this->fm->verifySession();
+	}
 	public function index()
 	{
 		$dados = array(
