@@ -18,6 +18,27 @@
 					<option value="Masculino" <?php echo ((isset($funcionario) AND $funcionario->sexo == 'Masculino') ? 'selected="selected"' : ''); ?>>Masculino</option>
 				</select>
 			</div>
+
+			<div class="form-group col-md-6">
+				<label for="id_uf">UF:</label>
+				<select name="id_uf" required class="form-control" id="id_uf">
+					<option value="">Selecione</option>
+					<?php foreach($estados as $estado) { ?>
+					<option value="<?php echo $estado->id; ?>"><?php echo $estado->sigla; ?></option>
+					<?php } ?>
+				</select>
+			</div>
+
+			<div class="form-group col-md-6">
+				<label for="id_cidade">Cidade:</label>
+				<div id="cidade">
+					<select name="id_cidade" required class="form-control">
+						<option value="">Selecione</option>
+					</select>
+				</div>
+			</div>
+
+
 			<div class="col-md-6">
 				<input type="submit" value="<?php echo (isset($funcionario) ? 'Editar' : 'Cadastrar'); ?>" class="btn btn-success">
 			</div>

@@ -59,6 +59,21 @@
             }
         }
         
+        $('#id_uf').change(function(){
+            var uf = $(this).val();
+            $.ajax({
+                type: "GET",
+                url: base_url + "funcionarios/get_cities/" + uf,
+                beforeSend: function(){
+                    $('#cidade').fadeOut();
+                },
+                success: function(result) {
+                    $('#cidade').fadeIn();
+                    $('#cidade').html(result);
+                }
+            });
+        });
+
     </script>
 
     <?php if(isset($dados)): ?>

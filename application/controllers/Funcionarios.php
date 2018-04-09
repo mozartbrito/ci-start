@@ -63,7 +63,7 @@ class Funcionarios extends CI_Controller {
 	public function cadastrar($id_funcionario = '')
 	{
 		$this->data['titulo'] = 'Novo funcionário';
-
+		$this->data['estados'] = $this->fm->get_all('ci-start.uf')->result();
 		if($id_funcionario != '') {
 			$this->data['titulo'] = 'Editar funcionário';
 			$this->data['funcionario'] = $this->fm->get_one($id_funcionario)->row();
@@ -75,6 +75,17 @@ class Funcionarios extends CI_Controller {
 
 		$this->data['conteudo'] = 'funcionarios/novo';
 		$this->load->view('index', $this->data);
+	}
+	public function get_cities($id_uf)
+	{
+		$cidades = $this->fm->get_all('ci-start.cidades', 'id_uf = '.$id_uf)->result();
+		echo '<select name="id_cidade" required class="form-control">';
+		echo '	<option value="">Selecione</option>';
+			foreach ($cidades as $cidade) {
+				echo '<option value="' .$cidade->id. '">' . $cidade->nome . '</option>';
+			}
+						
+		echo '</select>';
 	}
 
 }

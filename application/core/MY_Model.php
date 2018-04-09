@@ -10,9 +10,15 @@ class MY_Model extends CI_Model {
 	{
 		parent::__construct();
 	}
-	public function get_all()
+	public function get_all($table = '', $where = '')
 	{
-		return $this->db->get($this->table);
+		if($table == '') {
+			$table = $this->table;
+		}
+		if($where != '') {
+			$this->db->where($where);
+		}
+		return $this->db->get($table);
 	}	
 	public function get_one($primary_key)
 	{
