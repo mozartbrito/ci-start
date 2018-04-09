@@ -19,6 +19,7 @@ class Login extends CI_Controller {
 	}
 	public function logar()
 	{
+		sleep(1);
 		$email = $this->input->post('email');
 		$senha = $this->input->post('senha');
 
@@ -30,21 +31,13 @@ class Login extends CI_Controller {
 				'email' => $usuario->email,
 				'logado' => TRUE
 			));
-
-			$this->session->set_flashdata(array(
-				'tipo' => 'success',
-				'mensagem' => 'Login efetuado com sucesso!',
-			));
-			redirect('principal','refresh');
+			/*redirect('principal','refresh');*/
+			echo 1;
 
 		} else {
 			//$this->session->sess_destroy();
-			$this->session->set_flashdata(array(
-				'tipo' => 'danger',
-				'mensagem' => 'Usuário não encontrado!',
-				'destroy' => true
-			));
-			redirect('login','refresh');
+			/*redirect('login','refresh');*/
+			echo 0;
 		}
 
 	}
