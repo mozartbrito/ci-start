@@ -19,6 +19,33 @@ class Funcionarios extends CI_Controller {
 		$this->data['conteudo'] = 'funcionarios/index';
 		$this->load->view('index', $this->data);
 	}
+	public function index_pdf()
+	{
+		$this->data['funcionarios'] = $this->fm->get_all()->result();
+
+		$this->data['titulo'] = 'Lista de funcionários';
+		$this->data['conteudo'] = 'funcionarios/index';
+		
+		// Instancia a classe mPDF
+		$mpdf = new \Mpdf\mPDF(array( 'mode' => 'c' ));
+		// HTML dela para a variável $html	
+		$html = $this->load->view('funcionarios/index_pdf', $this->data, TRUE);
+		//$html = $this->load->view('index_no_header', $this->data, TRUE);
+
+		// Define um Cabeçalho para o arquivo PDF
+		$mpdf->SetHeader('Gerando PDF no CodeIgniter com a biblioteca mPDF');
+		// Define um rodapé para o arquivo PDF, nesse caso inserindo o número da
+		// página através da pseudo-variável PAGENO
+		$mpdf->SetFooter('{PAGENO}');
+		// Insere o conteúdo da variável $html no arquivo PDF
+		$mpdf->writeHTML($html);
+		// Cria uma nova página no arquivo
+		$mpdf->AddPage();
+		// Insere o conteúdo na nova página do arquivo PDF
+		$mpdf->WriteHTML('<p><b>Minha nova página no arquivo PDF</b></p>');
+		// Gera o arquivo PDF
+		$mpdf->Output();
+	}
 	public function mostrar($id_funcionario = '')
 	{
 		if($id_funcionario == '') {
