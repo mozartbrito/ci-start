@@ -10,7 +10,7 @@
 				<th>Nome</th>
 				<th>Data Nascimeto</th>
 				<th>Sexo</th>
-				<th>Ações</th>
+				<th>Município / UF</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -19,19 +19,8 @@
 				<td><?php echo $funcionario->nome; ?></td>
 				<td><?php echo viewDate($funcionario->dt_nascimento) ?></td>
 				<td><?php echo $funcionario->sexo; ?></td>
-				<td width="10%">
-					<a href="<?php echo site_url('funcionarios/mostrar/').$funcionario->id; ?>" title="Visualizar dados">
-						 <i class="far fa-user"></i>
-					</a>
-					&nbsp;
-					<a href="<?php echo site_url('funcionarios/cadastrar/').$funcionario->id; ?>" title="Editar dados">
-						 <i class="far fa-edit"></i>
-					</a>
-					&nbsp;
-					<a href="#" title="Deletar" onclick="return excluir('<?php echo site_url('funcionarios/deletar/').$funcionario->id; ?>')">
-						 <i class="far fa-trash-alt"></i>
-					</a>
-				</td>
+				<td><?php echo $funcionario->cidade.'/'.$funcionario->sigla; ?></td>
+				
 			</tr>
 			<?php } ?>
 		</tbody>

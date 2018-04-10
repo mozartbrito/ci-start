@@ -1,6 +1,7 @@
 <div class="col-md-12 table-responsive">
 	<div class="text-right">
 		<a href="<?php echo site_url('funcionarios/cadastrar') ?>" class="btn btn-success">Novo</a>
+		<a href="<?php echo site_url('funcionarios/gera_pdf') ?>" target="_blank" class="btn btn-success">Gerar PDF</a>
 	</div>
 	<br>
 	<table class="table table-bordered table-hover table-striped">
