@@ -24,7 +24,7 @@
 				<select name="id_uf" required class="form-control" id="id_uf">
 					<option value="">Selecione</option>
 					<?php foreach($estados as $estado) { ?>
-					<option value="<?php echo $estado->id; ?>"><?php echo $estado->sigla; ?></option>
+					<option value="<?php echo $estado->id; ?>" <?php echo((isset($funcionario) AND $funcionario->id_uf == $estado->id) ? 'selected="selected"' : ''); ?>><?php echo $estado->sigla; ?></option>
 					<?php } ?>
 				</select>
 			</div>
@@ -34,6 +34,9 @@
 				<div id="cidade">
 					<select name="id_cidade" required class="form-control">
 						<option value="">Selecione</option>
+						<?php if(isset($funcionario) AND $funcionario->id_cidade != '') { ?>
+							<option value="<?php echo $funcionario->id_cidade; ?>" selected="selected"><?php echo $funcionario->cidade; ?></option>
+						<?php } ?>
 					</select>
 				</div>
 			</div>

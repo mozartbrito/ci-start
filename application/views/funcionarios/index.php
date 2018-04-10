@@ -9,6 +9,7 @@
 				<th>Nome</th>
 				<th>Data Nascimeto</th>
 				<th>Sexo</th>
+				<th>Município/UF</th>
 				<th>Ações</th>
 			</tr>
 		</thead>
@@ -18,6 +19,7 @@
 				<td><?php echo $funcionario->nome; ?></td>
 				<td><?php echo viewDate($funcionario->dt_nascimento) ?></td>
 				<td><?php echo $funcionario->sexo; ?></td>
+				<td><?php echo $funcionario->cidade .' / ' .$funcionario->sigla;  ?></td>
 				<td width="10%">
 					<a href="<?php echo site_url('funcionarios/mostrar/').$funcionario->id; ?>" title="Visualizar dados">
 						 <i class="far fa-user"></i>

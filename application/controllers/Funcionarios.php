@@ -13,7 +13,7 @@ class Funcionarios extends CI_Controller {
 	}
 	public function index()
 	{
-		$this->data['funcionarios'] = $this->fm->get_all()->result();
+		$this->data['funcionarios'] = $this->fm->get()->result();
 
 		$this->data['titulo'] = 'Lista de funcionários';
 		$this->data['conteudo'] = 'funcionarios/index';
@@ -27,7 +27,7 @@ class Funcionarios extends CI_Controller {
 		$this->data['conteudo'] = 'funcionarios/index';
 		
 		// Instancia a classe mPDF
-		$mpdf = new \Mpdf\mPDF(array( 'mode' => 'c' ));
+		$mpdf = new \Mpdf\mPDF();
 		// HTML dela para a variável $html	
 		$html = $this->load->view('funcionarios/index_pdf', $this->data, TRUE);
 		//$html = $this->load->view('index_no_header', $this->data, TRUE);
@@ -52,8 +52,7 @@ class Funcionarios extends CI_Controller {
 			redirect('funcionarios/index', 'refresh');
 		}
 
-		$this->data['funcionario'] = $this->fm->get_one($id_funcionario)->row();	
-
+		$this->data['funcionario'] = $this->fm->get($id_funcionario)->row();	
 		$this->data['titulo'] = 'Dados de '.$this->data['funcionario']->nome;
 		$this->data['conteudo'] = 'funcionarios/mostrar';
 		$this->load->view('index', $this->data);
@@ -69,12 +68,30 @@ class Funcionarios extends CI_Controller {
 		$this->session->set_flashdata(array('tipo' => 'success', 'mensagem' => 'Excluído com sucesso!'));
 		redirect('funcionarios','refresh');
 	}
+	public function cadastrar($id_funcionario = '')
+	{
+		$this->data['titulo'] = 'Novo funcionário';
+		$this->data['estados'] = $this->fm->get_all('ci-start.uf')->result();
+		if($id_funcionario != '') {
+			$this->data['titulo'] = 'Editar funcionário';
+			$this->data['funcionario'] = $this->fm->get($id_funcionario)->row();
+
+			if(!isset($this->data['funcionario']->nome)) {
+				redirect('funcionarios','refresh');
+			}
+		}
+
+		$this->data['conteudo'] = 'funcionarios/novo';
+		$this->load->view('index', $this->data);
+	}
 	public function salvar()
 	{
 		$this->load->helper('funcoes');
 		$id_funcionario = $this->input->post('id');
 		$dados['nome'] = $this->input->post('nome');
 		$dados['sexo'] = $this->input->post('sexo');
+		$dados['id_uf'] = $this->input->post('id_uf');
+		$dados['id_cidade'] = $this->input->post('id_cidade');
 		$dados['dt_nascimento'] = $this->input->post('dt_nascimento');
 		$dados['dt_nascimento'] = gravaDateDB($dados['dt_nascimento']);
 
@@ -87,22 +104,7 @@ class Funcionarios extends CI_Controller {
 		}
 		redirect('funcionarios','refresh');
 	}
-	public function cadastrar($id_funcionario = '')
-	{
-		$this->data['titulo'] = 'Novo funcionário';
-		$this->data['estados'] = $this->fm->get_all('ci-start.uf')->result();
-		if($id_funcionario != '') {
-			$this->data['titulo'] = 'Editar funcionário';
-			$this->data['funcionario'] = $this->fm->get_one($id_funcionario)->row();
-
-			if(!isset($this->data['funcionario']->nome)) {
-				redirect('funcionarios','refresh');
-			}
-		}
-
-		$this->data['conteudo'] = 'funcionarios/novo';
-		$this->load->view('index', $this->data);
-	}
+	
 	public function get_cities($id_uf)
 	{
 		$cidades = $this->fm->get_all('ci-start.cidades', 'id_uf = '.$id_uf)->result();
